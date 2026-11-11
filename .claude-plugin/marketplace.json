@@ -1,0 +1,11 @@
+{
+  "name": "conciliador-erp",
+  "owner": { "name": "Conciliador ERP" },
+  "plugins": [
+    {
+      "name": "conciliador-erp",
+      "source": "./",
+      "description": "Concilia Processos de Compra do Minerion SGA com a planilha de metas (Base_Compras) — /conciliar"
+    }
+  ]
+}

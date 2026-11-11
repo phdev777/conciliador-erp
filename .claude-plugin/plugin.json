@@ -1,0 +1,6 @@
+{
+  "name": "conciliador-erp",
+  "version": "1.2.0",
+  "description": "Concilia Processos de Compra do Minerion SGA (somente consulta) com a aba Base_Compras das planilhas de metas de suprimentos: lê o ERP, confere com OCR + revisão visual do Claude e acrescenta as OCs novas na planilha aberta no Excel.",
+  "author": { "name": "Conciliador ERP" }
+}

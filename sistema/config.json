@@ -1,0 +1,41 @@
+{
+  "_leia": "EXEMPLO. Na 1a execução esta config é copiada para Documentos\ConciliadorERP\config.json — edite LÁ com as suas empresas. Uma entrada por empresa: 'titulo_erp' é um trecho do título da janela principal do Minerion quando a empresa está aberta; 'planilha' é o NOME do arquivo aberto no Excel.",
+  "empresas": {
+    "empresa1": {
+      "titulo_erp": "NOME DA EMPRESA 1",
+      "planilha": "base_empresa1.xlsx",
+      "aba": "Base_Compras",
+      "solicitante": "Nome do Solicitante",
+      "texto_a_vista": "A VISTA",
+      "texto_prazo": "{n} dias",
+      "pasta_backup": ""
+    },
+    "empresa2": {
+      "titulo_erp": "NOME DA EMPRESA 2",
+      "planilha": "base_empresa2.xlsx",
+      "aba": "Base_Compras",
+      "solicitante": "Nome do Solicitante",
+      "texto_a_vista": "A Vista",
+      "texto_prazo": "{n} dias",
+      "pasta_backup": ""
+    }
+  },
+  "erp": {
+    "_leia": "Teclas para abrir Almoxarifado > C. Processos de Compra a partir da tela principal.",
+    "teclas_menu_processos": "{VK_MENU down}{VK_MENU up}{RIGHT 3}{DOWN}c",
+    "espera_abrir_s": 1.5,
+    "lancar_situacoes": ["Ordem de Compra"]
+  },
+  "planilha": {
+    "linha_cabecalho": 5,
+    "colunas": {
+      "data_pedido": "A", "data_entrega": "B", "mes_ano": "C", "sla": "D", "rc": "E", "oc": "F",
+      "forma_pagamento": "G", "tipo": "H", "valor": "I", "saving": "J", "solicitante": "K",
+      "pacote": "L", "linha_pacote": "M", "item": "N", "fornecedor": "O", "localidade": "P",
+      "urgente": "Q", "registrado": "R", "observacao": "S"
+    },
+    "colunas_formula": ["C", "D", "L"],
+    "aba_base_dados": "Base de Dados",
+    "prefixo_anotacao": "Conciliador ERP: "
+  }
+}
