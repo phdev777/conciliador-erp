@@ -1,5 +1,5 @@
 {
-  "_leia": "EXEMPLO. Na 1a execução esta config é copiada para Documentos\ConciliadorERP\config.json — edite LÁ com as suas empresas. Uma entrada por empresa: 'titulo_erp' é um trecho do título da janela principal do Minerion quando a empresa está aberta; 'planilha' é o NOME do arquivo aberto no Excel.",
+  "_leia": "EXEMPLO. Na 1a execução esta config é copiada para Documentos/ConciliadorERP/config.json — edite LÁ com as suas empresas. Uma entrada por empresa: 'titulo_erp' é um trecho do título da janela principal do Minerion quando a empresa está aberta; 'planilha' é o NOME do arquivo aberto no Excel.",
   "empresas": {
     "empresa1": {
       "titulo_erp": "NOME DA EMPRESA 1",

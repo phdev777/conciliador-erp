@@ -16,10 +16,53 @@ def _log(msg):
     print(time.strftime("%H:%M:%S"), msg, flush=True)
 
 
+def _principal_remota():
+    """Minerion como app remoto (RemoteApp): a moldura principal é a maior janela 'RAIL_WINDOW' sem título próprio."""
+    if not tela.achar("Minerion SGA (Remoto)")[1]:
+        return None
+    best = None
+    for t, w in tela.janelas():
+        try:
+            if w.class_name() == "RAIL_WINDOW" and t.strip() == "(Remoto)":
+                r = w.rectangle(); a = r.width() * r.height()
+                if best is None or a > best[0]: best = (a, w)
+        except Exception:
+            pass
+    return best[1] if best else None
+
+
+def principal():
+    """Janela principal do Minerion (local ou remota)."""
+    _, w = tela.achar("Minerion SGA - ")
+    return w or _principal_remota()
+
+
+def _titulo_remoto(w):
+    """No remoto o título com a empresa só existe desenhado na tela: lê a barra de título com o OCR do Windows."""
+    from . import extrator, config
+    _, p = tela.achar("Pesquisa de Processos")
+    if p:  # a pesquisa cobre a barra de título; Esc só fecha a pesquisa (abrir_pesquisa reabre com F5)
+        tela.teclas(p, "{ESC}"); tela.esperar_sumir("Pesquisa de Processos", 5)
+    tela.focar(w)
+    cap = config.pasta_dados() / "_titulo_erp.png"
+    tela.capturar_area(w, 0, 0, 900, 30, cap, ampliar=3)
+    try:
+        return " ".join(x["t"] for x in list(extrator.rodar_ocr([cap]).values())[0])
+    finally:
+        cap.unlink(missing_ok=True)
+
+
 def verificar_empresa(emp):
     principais = [(t, w) for t, w in tela.janelas() if t.startswith("Minerion SGA - ")]
     if not principais:
-        raise Abortado("Janela principal do Minerion não encontrada. Abra o Minerion SGA.")
+        w = _principal_remota()
+        if not w:
+            raise Abortado("Janela principal do Minerion não encontrada. Abra o Minerion SGA.")
+        t = _titulo_remoto(w)
+        _log(f"Minerion remoto, título lido: {t}")
+        if "minerion" not in t.lower() or emp["titulo_erp"].lower() not in t.lower():
+            raise Abortado(f"Não confirmei a empresa '{emp['titulo_erp']}' no título do Minerion remoto: '{t}'.")
+        return w
     if len(principais) > 1:
         raise Abortado("Há mais de uma empresa aberta no Minerion (" + "; ".join(t for t, _ in principais) +
                        "). Feche as outras e deixe só a empresa que vai conciliar.")
@@ -35,7 +78,8 @@ def abrir_pesquisa(cfg, de, ate):
     if not pesq:
         t, dlg = tela.achar("Processos de Compra")
         if not dlg:
-            _, main = tela.achar("Minerion SGA - ")
+            main = principal()
+            if not main: raise Abortado("Janela principal do Minerion não encontrada.")
             tela.focar(main)
             from pywinauto import keyboard
             keyboard.send_keys(cfg["erp"]["teclas_menu_processos"], pause=0.08)

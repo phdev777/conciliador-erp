@@ -85,3 +85,12 @@ def capturar(w, caminho):
     img = ImageGrab.grab(all_screens=True)
     img.crop((r.left - ox, r.top - oy, r.right - ox, r.bottom - oy)).save(caminho)
     return caminho
+
+
+def capturar_area(w, x, y, larg, alt, caminho, ampliar=1):
+    """Salva um trecho da janela w (x, y relativos ao canto da janela), ampliado para o OCR."""
+    r = w.rectangle(); ox, oy = _origem_virtual()
+    img = ImageGrab.grab(all_screens=True)
+    img = img.crop((r.left + x - ox, r.top + y - oy, r.left + x + larg - ox, r.top + y + alt - oy))
+    img.resize((img.width * ampliar, img.height * ampliar)).save(caminho)
+    return caminho
