@@ -21,7 +21,7 @@ skills\conciliar\    <- skill /conciliar do Claude (método com Claude)
 | Melhor para | Precisão máxima, nomes de itens/fornecedores limpos | Rodar sozinho, rápido, sem custo |
 
 ## Antes de começar (os dois métodos)
-1. **Minerion SGA** aberto **só na empresa** que vai conciliar (uma empresa por vez).
+1. **Minerion SGA** aberto **só na empresa** que vai conciliar (uma empresa por vez). Funciona também com o Minerion aberto como app remoto ("Minerion SGA (Remoto)"): a empresa é conferida lendo a barra de título com o OCR.
 2. **Planilha da empresa aberta no Excel**, do jeito que você sempre abre (pelo OneDrive/SharePoint, com salvamento automático).
 3. Durante a leitura do ERP (~25 s por OC) **não mexa no mouse/teclado**.
 
